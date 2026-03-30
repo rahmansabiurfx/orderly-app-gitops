@@ -1,0 +1,15 @@
+# ════════════════════════════════════════════════════════════════
+# Default Helm Values for orderly-app
+# ════════════════════════════════════════════════════════════════
+
+image:
+  repository: 456387077581.dkr.ecr.us-east-1.amazonaws.com/orderly-app
+  
+  tag: "initial"
+  pullPolicy: Always
+
+app:
+  name: orderly-app
+  port: 8080
+
+replicaCount: 2
