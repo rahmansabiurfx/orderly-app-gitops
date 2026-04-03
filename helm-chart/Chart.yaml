@@ -1,0 +1,10 @@
+# ════════════════════════════════════════════════════════════════
+# Helm Chart Metadata
+# ════════════════════════════════════════════════════════════════
+
+apiVersion: v2
+name: orderly-app
+description: Helm chart fort the orderly-app FastAPI application
+type: application
+version: 0.1.0
+appVersion: "0.2.0"

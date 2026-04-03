@@ -1,0 +1,29 @@
+# ════════════════════════════════════════════════════════════════
+# Staging Environment Overrides
+# ════════════════════════════════════════════════════════════════
+
+replicaCount: 2
+
+env:
+  APP_NAME: "orderly-app"
+  APP_VERSION: "0.2.0"
+  ENVIRONMENT: "staging"
+
+ingress:
+  enabled: true
+  className: nginx
+  host: orderly-app.staging.local
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 70

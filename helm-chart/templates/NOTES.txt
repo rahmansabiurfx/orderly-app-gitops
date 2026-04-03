@@ -1,0 +1,26 @@
+═══════════════════════════════════════════════════════
+  {{ .Chart.Name }} has been deployed!
+═══════════════════════════════════════════════════════
+
+  App Version : {{ .Chart.AppVersion }}
+  Image       : {{ .Values.image.repository }}:{{ .Values.image.tag }}
+  Environment : {{ .Values.env.ENVIRONMENT }}
+  Replicas    : {{ .Values.replicaCount }}
+
+{{- if .Values.ingress.enabled }}
+
+  Ingress Host: {{ .Values.ingress.host }}
+
+  Make sure /etc/hosts has:
+    127.0.0.1  {{ .Values.ingress.host }}
+
+  Access the app:
+    curl http://{{ .Values.ingress.host }}/
+    curl http://{{ .Values.ingress.host }}/health
+    curl http://{{ .Values.ingress.host }}/info
+{{- end }}
+
+  Useful commands:
+    kubectl get pods -l app.kubernetes.io/instance={{ .Release.Name }}
+    kubectl logs -l app.kubernetes.io/instance={{ .Release.Name }}
+═══════════════════════════════════════════════════════

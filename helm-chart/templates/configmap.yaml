@@ -1,0 +1,14 @@
+# ════════════════════════════════════════════════════════════════
+# ConfigMap — Stores environment variables for the application
+# ════════════════════════════════════════════════════════════════
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "orderly-app.fullname" . }}-config
+  labels:
+    {{- include "orderly-app.labels" . | nindent 4 }}
+data:
+  {{- range $key, $value := .Values.env }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}

@@ -2,14 +2,72 @@
 # Default Helm Values for orderly-app
 # ════════════════════════════════════════════════════════════════
 
+# ── Container Image ──
 image:
   repository: 456387077581.dkr.ecr.us-east-1.amazonaws.com/orderly-app
-  
-  tag: "21b219f"
+  tag: "initial"
   pullPolicy: Always
 
+# ── Application Settings ──
 app:
   name: orderly-app
   port: 8080
 
+# ── Replica Count ──
 replicaCount: 2
+
+# ── Environment Variables ──
+env:
+  APP_NAME: "orderly-app"
+  APP_VERSION: "0.2.0"
+  ENVIRONMENT: "production"
+
+# ── Service ──
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+# ── Ingress ──
+ingress:
+  enabled: true
+  className: nginx
+  host: orderly-app.local
+  annotations: {}
+
+# ── Resource Requests and Limits ──
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
+
+# ── Autoscaling (HPA) ──
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+# ── Health Check Probes ──
+probes:
+  liveness:
+    path: /health
+    initialDelaySeconds: 10
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 3
+  readiness:
+    path: /ready
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+# ── Pod Security Context ──
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000

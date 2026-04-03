@@ -1,0 +1,28 @@
+# ════════════════════════════════════════════════════════════════
+# Dev Environment Overrides.
+# ════════════════════════════════════════════════════════════════
+
+replicaCount: 2
+
+env:
+  APP_NAME: "orderly-app"
+  APP_VERSION: "0.2.0"
+  ENVIRONMENT: "dev"
+
+ingress:
+  enabled: true
+  className: nginx
+  host: orderly-app.dev.local
+  annotationss:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 150m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
