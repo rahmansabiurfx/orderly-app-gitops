@@ -6,10 +6,10 @@
 image:
   repository: 456387077581.dkr.ecr.us-east-1.amazonaws.com/orderly-app
 <<<<<<< HEAD
-  tag: "initial"
+  tag: "5ce4c67"
 =======
   
-  tag: "e407bd1"
+  tag: "5ce4c67"
 >>>>>>> 5c83d778a5d5121fa4aabda08f2fbbaf2ea3540d
   pullPolicy: Always
 
