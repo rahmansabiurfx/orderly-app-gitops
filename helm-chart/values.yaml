@@ -5,12 +5,7 @@
 # ── Container Image ──
 image:
   repository: 456387077581.dkr.ecr.us-east-1.amazonaws.com/orderly-app
-<<<<<<< HEAD
-  tag: "5ce4c67"
-=======
-  
-  tag: "5ce4c67"
->>>>>>> 5c83d778a5d5121fa4aabda08f2fbbaf2ea3540d
+  tag: "e407bd1"
   pullPolicy: Always
 
 # ── Application Settings ──
@@ -74,5 +69,3 @@ probes:
 # ── Pod Security Context ──
 podSecurityContext:
   runAsNonRoot: true
-  runAsUser: 1000
-  runAsGroup: 1000

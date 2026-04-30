@@ -30,29 +30,29 @@ spec:
       annotations:
         checksum/config: {{ include (print .Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
-      # ── Security Context (Pod level) ──
       securityContext:
         runAsNonRoot: {{ .Values.podSecurityContext.runAsNonRoot }}
+        {{- if .Values.podSecurityContext.runAsUser }}
         runAsUser: {{ .Values.podSecurityContext.runAsUser }}
+        {{- end }}
+        {{- if .Values.podSecurityContext.runAsGroup }}
         runAsGroup: {{ .Values.podSecurityContext.runAsGroup }}
+        {{- end }}
 
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
-          # Container ports
           ports:
             - name: http
               containerPort: {{ .Values.app.port }}
               protocol: TCP
 
-          # ── Environment Variables from ConfigMap ──
           envFrom:
             - configMapRef:
                 name: {{ include "orderly-app.fullname" . }}-config
 
-          # ── Liveness Probe ──
           livenessProbe:
             httpGet:
               path: {{ .Values.probes.liveness.path }}
@@ -62,7 +62,6 @@ spec:
             timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds }}
             failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
 
-          # ── Readiness Probe ──
           readinessProbe:
             httpGet:
               path: {{ .Values.probes.readiness.path }}
@@ -72,6 +71,5 @@ spec:
             timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }}
             failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
 
-          # ── Resource Limits ──
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
