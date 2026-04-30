@@ -5,7 +5,7 @@
 # ── Container Image ──
 image:
   repository: 456387077581.dkr.ecr.us-east-1.amazonaws.com/orderly-app
-  tag: "e407bd1"
+  tag: "dbf06df"
   pullPolicy: Always
 
 # ── Application Settings ──
