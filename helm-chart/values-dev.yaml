@@ -10,7 +10,7 @@ replicaCount: 2
 env:
   APP_NAME: "orderly-app"
   APP_VERSION: "0.2.0"
-  ENVIRONMENT: "dev"
+  ENVIRONMENT: "dev-gitops"
 
 ingress:
   enabled: true
