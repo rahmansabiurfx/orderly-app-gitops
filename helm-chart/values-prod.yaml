@@ -2,11 +2,14 @@
 # Production Environment Overrides
 # ════════════════════════════════════════════════════════════════
 
+image:
+  pullPolicy: IfNotPresent
+
 replicaCount: 3
 
 env:
   APP_NAME: "orderly-app"
-  APP_VERSION: "0.2.0"
+  APP_VERSION: "0.3.0"
   ENVIRONMENT: "production"
 
 ingress:
@@ -14,7 +17,7 @@ ingress:
   className: nginx
   host: orderly-app.prod.local
   annotations:
-    nginx.ingress.kubernetes.io/rate-limiting: "on"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 
 resources:
   requests:
@@ -26,6 +29,6 @@ resources:
 
 autoscaling:
   enabled: true
-  minReplicas: 2
+  minReplicas: 3
   maxReplicas: 6
   targetCPUUtilizationPercentage: 70
