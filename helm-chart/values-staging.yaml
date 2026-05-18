@@ -3,7 +3,7 @@
 # ════════════════════════════════════════════════════════════════
 
 image:
-  tag: "2b07101"
+  tag: "7030137"
   pullPolicy: IfNotPresent
 
 replicaCount: 2
